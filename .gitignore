@@ -1,0 +1,12 @@
+# Compiled class files
+**/target/
+**/build/
+
+# IDE settings
+.idea/
+*.iml
+*.iws
+
+# Logs and temp files
+*.log
+.DS_Store
