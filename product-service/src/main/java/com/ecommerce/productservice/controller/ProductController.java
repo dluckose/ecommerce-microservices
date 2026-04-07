@@ -79,10 +79,11 @@ public class ProductController {
     }*/
 
     // 3. Get Single Product by ID
- /*   @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.getProductById(id));
-    }*/
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
 
     // 4. Get Products by Category
    /* @GetMapping("/category/{categoryId}")

@@ -53,4 +53,12 @@ public class ProductService {
         // 3. Use the built-in repository method
         return productRepository.findAll(pageable);
     }
+    public Product getProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        //String desc = productAiService.generateSmartDescription(product.getName(),category.getName());
+        //product.setDescription(desc);
+        //product.setCategory(category);
+        return product;
+    }
 }
