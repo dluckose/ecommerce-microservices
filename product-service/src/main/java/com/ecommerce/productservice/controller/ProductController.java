@@ -41,6 +41,7 @@ public class ProductController {
             @PathVariable Long categoryId,
             @RequestParam("name") String name,
             @RequestParam("price") Double price,
+            @RequestParam("stock") Long stock,
             @RequestParam("image") MultipartFile file) throws IOException {
 
         // 1. Upload to Cloudinary
@@ -48,6 +49,7 @@ public class ProductController {
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);
+        product.setStock(stock);
         product.setImageUrl(imagePath);
         //add later - for delete
         //String publicId = uploadResult.get("public_id").toString();

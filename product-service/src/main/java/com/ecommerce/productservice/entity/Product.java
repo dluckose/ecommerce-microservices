@@ -18,6 +18,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
     private Category category;
+    private Long stock;
     private String imageUrl;
 
     // Add this to your DB to make deleting easy!
