@@ -19,7 +19,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private Category category;
-    private Long stock;
+    private Integer stock;
     private String imageUrl;
 
     // Add this to your DB to make deleting easy!

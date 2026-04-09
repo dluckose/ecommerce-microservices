@@ -1,5 +1,6 @@
 package com.ecommerce.productservice.controller;
 
+import com.ecommerce.productservice.dto.StockRequest;
 import com.ecommerce.productservice.dto.UserDetail;
 import com.ecommerce.productservice.entity.Product;
 import com.ecommerce.productservice.service.ImageUploadService;
@@ -41,7 +42,7 @@ public class ProductController {
             @PathVariable Long categoryId,
             @RequestParam("name") String name,
             @RequestParam("price") Double price,
-            @RequestParam("stock") Long stock,
+            @RequestParam("stock") Integer stock,
             @RequestParam("image") MultipartFile file) throws IOException {
 
         // 1. Upload to Cloudinary
@@ -60,6 +61,14 @@ public class ProductController {
         List<UserDetail> list = productService.getAllUsers();
         System.out.println("22222" +list);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}/reduce-stock")
+    public ResponseEntity<String> reduceProduct(
+            @PathVariable Long id,
+            @RequestBody StockRequest request) throws IOException {
+        productService.reduceStock(id, request.quantity());
+        return new ResponseEntity<>("stock updated",HttpStatus.OK);
     }
 
     @GetMapping

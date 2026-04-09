@@ -61,4 +61,10 @@ public class ProductService {
         //product.setCategory(category);
         return product;
     }
+    public Product reduceStock(Long id,Integer quantity) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setStock(product.getStock() - quantity);
+        return productRepository.save(product);
+    }
 }
