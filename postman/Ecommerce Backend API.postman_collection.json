@@ -10,14 +10,6 @@
       "name": "User Service",
       "item": [
         {
-          "name": "Create User",
-          "request": {
-            "method": "GET",
-            "header": []
-          },
-          "response": []
-        },
-        {
           "name": "Get User",
           "request": {
             "method": "GET",
@@ -43,14 +35,6 @@
         },
         {
           "name": "Delete User",
-          "request": {
-            "method": "GET",
-            "header": []
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
           "request": {
             "method": "GET",
             "header": []
