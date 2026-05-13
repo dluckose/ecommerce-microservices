@@ -1,6 +1,7 @@
 package com.ecommerce.productservice.service;
 
 import com.ecommerce.productservice.controller.UserClient;
+import com.ecommerce.productservice.dto.ProductMessage;
 import com.ecommerce.productservice.dto.UserDetail;
 import com.ecommerce.productservice.entity.Category;
 import com.ecommerce.productservice.entity.Product;
@@ -25,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private UserClient userClient;
+
+    @Autowired
+    private ProductProducer productProducer;     // Injecting our new Producer
     //@Autowired
     //private ProductAiService productAiService;
     public List<UserDetail> getAllUsers() {
@@ -36,7 +40,17 @@ public class ProductService {
         //String desc = productAiService.generateSmartDescription(product.getName(),category.getName());
         //product.setDescription(desc);
         product.setCategory(category);
-        return productRepository.save(product);
+        Product savedProduct = productRepository.save(product);
+
+        // 2. Create the DTO for RabbitMQ
+        ProductMessage message = new ProductMessage(
+                savedProduct.getId().toString(),
+                savedProduct.getName(),
+                savedProduct.getCategory().getName(),
+                savedProduct.getPrice()
+        );
+        productProducer.sendProductUpdate(message);
+        return savedProduct;
     }
     public List<Product> getProductsByCategoryId(Long categoryId) {
         return productRepository.findByCategoryId(categoryId);
